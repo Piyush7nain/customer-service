@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,11 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 
@@ -40,7 +37,8 @@ public class Customer {
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "customer", orphanRemoval = true)
 	private List<Orders> orders = new ArrayList<>();
 
-	@OneToOne
+	@Embedded
+	@Column(nullable = true)
 	private Address address;
 
 	public List<Orders> getOrders() {
@@ -63,8 +61,9 @@ public class Customer {
 		this.address = address;
 	}
 
-	public Customer(String customerName, int i) {
+	public Customer(String customerName, int i, Address add) {
 		super();
+		this.address = add;
 		this.customerName = customerName;
 		this.accountBalance = i;
 	}
@@ -77,6 +76,7 @@ public class Customer {
 		return customerId;
 	}
 
+	
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}

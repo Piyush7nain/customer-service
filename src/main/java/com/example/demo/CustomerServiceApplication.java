@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.demo.model.Address;
 import com.example.demo.model.Customer;
 import com.example.demo.model.Orders;
 import com.example.demo.repo.CustomerRepository;
@@ -28,9 +29,9 @@ public class CustomerServiceApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		customerRepository.save(new Customer("John Doe",200000));
-		customerRepository.save(new Customer("Marry Public",120000));
-		customerRepository.save(new Customer("Demo Name",70000));
+		customerRepository.save(new Customer("John Doe",200000, new Address("a","b",1)));
+		customerRepository.save(new Customer("Marry Public",120000, new Address("a","b",1)));
+		customerRepository.save(new Customer("Demo Name",70000, new Address("a","b",1)));
 		orderService.addOrder(new Orders("mobile"), 1);
 		orderService.addOrder(new Orders("mobile"), 2);
 		orderService.addOrder(new Orders("mobile"), 3);

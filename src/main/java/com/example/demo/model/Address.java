@@ -1,20 +1,14 @@
 package com.example.demo.model;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Address {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	
-	@OneToOne(mappedBy ="address")
-	private Customer customer; 
+@Embeddable
+public class Address {		 
 	private String street;
 	private String city;
 	private int pincode;
